@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { Modal, ModalBody, ModalHeader, Button, ModalFooter } from "reactstrap";
 import SkillListTable from "./SkillListTable";
+import "./styles.css";
 //import UserList from "./UserList";
 //import NewUserModal from "./NewUserModal";
+//
 
 import axios from "axios";
 
@@ -49,7 +51,7 @@ class SkillListModal extends Component {
         <Button color="warning" onClick={() => this.toggle()}>
           Skills
         </Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} size="lg">
           <ModalHeader toggle={this.toggle}>
             <div className="text-center">Skill list for {this.props.firstname}</div>
           </ModalHeader>
@@ -59,6 +61,10 @@ class SkillListModal extends Component {
             />
           </ModalBody>
           <ModalFooter>
+            <Button type="button">
+              Add
+            </Button>
+            &nbsp;&nbsp;
             <Button type="button" onClick={() => this.toggle()}>
               Cancel
             </Button>

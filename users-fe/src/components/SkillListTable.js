@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 
 
 class SkillListTable extends Component {
+  addHours(){
+
+  }
+
   render() {
     const skills = this.props.skills;
     console.log("Generating Table. Skills: ", skills);
@@ -29,6 +33,19 @@ class SkillListTable extends Component {
               <td>{skill.skill_hours}</td>
               <td align="center">
                 {//TODO: EditSkillModal, AddHoursModal, DeleteSkillModal
+                  <div>
+                  <Button type="button">
+                    Add Hours
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button type="button">
+                    Modify
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button type="button">
+                    Delete
+                  </Button>
+                  </div>
                 }
                 &nbsp;&nbsp;
               </td>
