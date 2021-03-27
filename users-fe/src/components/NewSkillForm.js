@@ -8,17 +8,15 @@ import { API_URL } from "../constants";
 class NewSkillForm extends React.Component {
   state = {
     pk: 0,
-    username: "",
-    email: "",
-    password: "",
-    firstname: "",
-    lastname: ""
+    skill_name: "",
+    skill_hours: ""
   };
 
+
   componentDidMount() {
-    if (this.props.user) {
-      const { pk, username, email, password, firstname, lastname } = this.props.user;
-      this.setState({ pk, username, email, password, firstname, lastname });
+    if (this.props.skill) {
+      const { pk, skill_name, skill_hours } = this.props.skill;
+      this.setState({ pk, skill_name, skill_hours });
     }
   }
 
@@ -26,17 +24,17 @@ class NewSkillForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  createUser = e => {
+  createSkill = e => {
     e.preventDefault();
-    axios.post(API_URL, this.state).then(() => {
+    axios.post(API_URL + this.props.pk, this.state).then(() => {
       this.props.resetState();
       this.props.toggle();
     });
   };
 
-  editUser = e => {
+  editSkill = e => {
     e.preventDefault();
-    axios.put(API_URL + this.state.pk, this.state).then(() => {
+    axios.put(API_URL + this.props.pk + "/skills/" + this.state.pk, this.state).then(() => {
       this.props.resetState();
       this.props.toggle();
     });
@@ -48,50 +46,23 @@ class NewSkillForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.props.user ? this.editUser : this.createUser}>
+      <Form onSubmit={this.props.skill ? this.editSkill : this.createSkill}>
         <FormGroup>
-          <Label for="username">Username:</Label>
+          <Label for="skill_name">Skill Name:</Label>
           <Input
             type="text"
-            name="username"
+            name="skill_name"
             onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.username)}
+            value={this.defaultIfEmpty(this.state.skill_name)}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="email">Email:</Label>
+          <Label for="skill_hours">Skill Hours:</Label>
           <Input
-            type="email"
-            name="email"
+            type="decimal"
+            name="skill_hours"
             onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.email)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password:</Label>
-          <Input
-            type="password"
-            name="password"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.password)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="firstname">Firstname:</Label>
-          <Input
-            type="text"
-            name="firstname"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.firstname)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="lastname">Lastname:</Label>
-          <Input
-            type="text"
-            name="lastname"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.lastname)}
+            value={this.defaultIfEmpty(this.state.skill_hours)}
           />
         </FormGroup>
         <Button>Send</Button>

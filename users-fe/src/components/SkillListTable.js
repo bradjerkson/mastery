@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Table, Button } from "reactstrap";
+import NewSkillForm from "./NewSkillForm";
+import ConfirmRemovalModal from "./ConfirmRemovalModal";
 
 
 class SkillListTable extends Component {
@@ -34,17 +36,25 @@ class SkillListTable extends Component {
               <td align="center">
                 {//TODO: EditSkillModal, AddHoursModal, DeleteSkillModal
                   <div>
+
+
                   <Button type="button">
                     Add Hours
                   </Button>
                   &nbsp;&nbsp;
-                  <Button type="button">
-                    Modify
-                  </Button>
+                  <NewSkillForm
+                    resetState={this.props.resetState}
+                    toggle={this.toggle}
+                    create={false}
+                    skill={skill}
+                    pk={this.props.user_pk}
+                  />
                   &nbsp;&nbsp;
-                  <Button type="button">
-                    Delete
-                  </Button>
+                  <ConfirmRemovalModal
+                    pk={this.props.user_pk}
+                    resetState={this.props.resetState}
+                    skill={skill}
+                  />
                   </div>
                 }
                 &nbsp;&nbsp;

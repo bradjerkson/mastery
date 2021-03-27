@@ -58,6 +58,7 @@ class SkillListModal extends Component {
           <ModalBody>
             <SkillListTable
               skills={this.state.skills}
+              user_pk={this.props.pk}
             />
           </ModalBody>
           <ModalFooter>
